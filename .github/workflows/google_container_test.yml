@@ -25,12 +25,12 @@ jobs:
       run: sudo apt-get update
 
     - run: sudo apt-get install cpu-checker
-    
-    - name: Install kvm
-      run: sudo kvm-ok
 
     - name: Install kvm
       run: sudo apt-get install qemu-kvm libvirt-bin ubuntu-vm-builder bridge-utils
+
+    - name: Install kvm
+      run: sudo kvm-ok
 
     - run: adb devices
 
