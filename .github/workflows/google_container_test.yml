@@ -24,6 +24,8 @@ jobs:
     - name: update apt
       run: sudo apt-get update
 
+    - run: sudo apt-get install cpu-checker
+    
     - name: Install kvm
       run: sudo kvm-ok
 
