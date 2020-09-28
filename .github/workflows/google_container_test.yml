@@ -22,7 +22,7 @@ jobs:
       run: sdkmanager platform-tools
     
     - name: Install kvm
-      run: sudo apt-get install qemu-kvm libvirt-bin ubuntu-vm-builder bridge-utils
+      run: sudo apt-get install qemu-kvm 
 
     - run: adb devices
 
