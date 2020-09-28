@@ -32,9 +32,7 @@ jobs:
     - name: Build with Gradle
       run: |
         PATH=$PATH:~/android-sdk/platform-tools
-        ls ~/android-sdk
         ls ~/android-sdk/sdk_home
-        ls ~/android-sdk/platform-tools
         DOCKER_IMAGE=us-docker.pkg.dev/android-emulator-268719/images/r-google-x64:30.0.23
 
         PORT=15555
