@@ -49,6 +49,7 @@ jobs:
         # PORT=5555
 
         container_id=$(docker run -d \
+          --device /dev/kvm \
           -e "ADBKEY=$(cat ~/.android/adbkey)" --publish \
           8554:8554/tcp --publish $PORT:5555/tcp  \
           $DOCKER_IMAGE)
