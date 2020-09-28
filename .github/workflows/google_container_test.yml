@@ -1,6 +1,6 @@
 name: Google Container Script
 
-on: [push, pull_request]
+on: [push]
 
 jobs:
   build:
@@ -36,7 +36,7 @@ jobs:
         PORT=15555
 
         container_id=$(docker run -d \
-          -e "ADBKEY=$(cat ~/.android/adbkey)" --device /dev/kvm --publish \
+          -e "ADBKEY=$(cat ~/.android/adbkey)" --publish \
           8554:8554/tcp --publish $PORT:5555/tcp  \
           $DOCKER_IMAGE)
 
