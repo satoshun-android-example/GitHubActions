@@ -1,0 +1,39 @@
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:app="http://schemas.android.com/apk/res-auto"
+  xmlns:tools="http://schemas.android.com/tools"
+  android:id="@+id/nav_graph"
+  app:startDestination="@id/nav_home">
+
+  <fragment
+    android:id="@+id/nav_home"
+    android:name="com.github.satoshun.example.main.MainFragment"
+    tools:layout="@layout/main_frag">
+
+    <action
+      android:id="@+id/nav_home_to_flexbox_perf"
+      app:destination="@id/nav_flexbox_perf" />
+
+    <action
+      android:id="@+id/nav_home_to_max_line"
+      app:destination="@id/nav_max_line" />
+
+    <action
+      android:id="@+id/nav_home_to_max_height"
+      app:destination="@id/nav_max_height" />
+  </fragment>
+
+  <fragment
+    android:id="@+id/nav_flexbox_perf"
+    android:name="com.github.satoshun.example.main.flexboxperf.FlexboxPerfFragment"
+    tools:layout="@layout/flexbox_perf_frag" />
+
+  <fragment
+    android:id="@+id/nav_max_line"
+    android:name="com.github.satoshun.example.main.maxline.MaxLineFragment"
+    tools:layout="@layout/flexbox_max_line" />
+
+  <fragment
+    android:id="@+id/nav_max_height"
+    android:name="com.github.satoshun.example.main.maxheight.FlexboxMaxHeightFragment"
+    tools:layout="@layout/flexbox_max_line" />
+</navigation>
