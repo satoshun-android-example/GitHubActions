@@ -10,6 +10,9 @@ jobs:
     - name: Checkout
       uses: actions/checkout@v2
 
+    - name: Install Android SDK
+      uses: malinskiy/action-android/install-sdk@release/0.0.7
+
     - name: Gradle Wrapper Validation
       uses: gradle/wrapper-validation-action@v1
 
