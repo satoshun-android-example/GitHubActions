@@ -1,0 +1,64 @@
+name: Google Container Script
+
+on: [push, pull_request]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v2
+
+    - name: Gradle Wrapper Validation
+      uses: gradle/wrapper-validation-action@v1
+
+    - name: set up JDK 1.8
+      uses: actions/setup-java@v1
+      with:
+        java-version: 1.8
+
+    - name: Copy CI gradle.properties
+      run: mkdir -p ~/.gradle ; cp .github/ci-gradle.properties ~/.gradle/gradle.properties
+
+    - uses: actions/cache@v2
+      with:
+        path: |
+          ~/.gradle/caches
+        key: ${{ runner.os }}-gradle-${{ hashFiles('**/Dependencies.kt') }}
+        restore-keys: |
+          ${{ runner.os }}-gradle-
+
+    - name: Build with Gradle
+      run: |
+        DOCKER_IMAGE=us-docker.pkg.dev/android-emulator-268719/images/r-google-x64:30.0.23
+
+        PORT=15555
+
+        container_id=$(docker run -d \
+          -e "ADBKEY=$(cat ~/.android/adbkey)" --device /dev/kvm --publish \
+          8554:8554/tcp --publish $PORT:5555/tcp  \
+          $DOCKER_IMAGE)
+
+        echo "The container is running with id: $container_id"
+
+        echo "Connecting to forwarded adb port."
+        adb connect localhost:$PORT
+
+        echo "Waiting until the device is ready"
+        adb wait-for-device
+
+        while [ "`adb shell getprop sys.boot_completed | tr -d '\r' `" != "1" ] ;
+        do
+          echo "Still waiting for boot.."
+          sleep 1;
+        done
+
+        # Now you can use the emulator as usual for example:
+        # ./gradlew installDebug
+        # ./gradlew connectedAndroidTest
+        # etc..
+
+        echo "The device is ready"
+        echo "Run the following command to stop the container:"
+        echo "docker stop ${container_id}"
