@@ -89,6 +89,6 @@ class SampleAdapter : ListAdapter<Data, RecyclerView.ViewHolder>(
 }
 
 data class Data(
-  var label: String,
-  var isChecked: Boolean
+    var label: String,
+    var isChecked: Boolean
 )
